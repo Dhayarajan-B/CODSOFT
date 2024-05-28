@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: hwb(231 39% 20%);
+    }
+    .calculator {
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: hwb(168 44% 21%);
+        transition: transform 0.2s ease;
+        margin-top: 8%;
+    }
+    input[type="text"] {
+        width: 90%;
+        height: 55px;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 24px;
+        text-align: right;
+        border: solid;
+        outline: 1px solid black;
+        border-radius: 5px;
+    }
+    input[type="button"] {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 20px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+    }
+    input[type="button"].number {
+        background-color: #4CAF50;
+        color: #fff;
+    }
+    input[type="button"].operator {
+        background-color: #FF5722;
+        color: #fff;
+    }
+    input[type="button"].delete {
+        background-color: #FF5722;
+        color: #fff;
+    }
+    input[type="button"]:hover {
+        background-color: #ddd;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" readonly>
+    <input type="button" class="operator" value="AC" onclick="clearDisplay()">
+    <input type="button" class="delete" value="&#9003;" onclick="deleteLastCharacter()">
+    <br>
+    <input type="button" class="number" value="7" onclick="appendToDisplay('7')">
+    <input type="button" class="number" value="8" onclick="appendToDisplay('8')">
+    <input type="button" class="number" value="9" onclick="appendToDisplay('9')">
+    <input type="button" class="operator" value="/" onclick="appendToDisplay('/')">
+    <br>
+    <input type="button" class="number" value="4" onclick="appendToDisplay('4')">
+    <input type="button" class="number" value="5" onclick="appendToDisplay('5')">
+    <input type="button" class="number" value="6" onclick="appendToDisplay('6')">
+    <input type="button" class="operator" value="*" onclick="appendToDisplay('*')">
+    <br>
+    <input type="button" class="number" value="1" onclick="appendToDisplay('1')">
+    <input type="button" class="number" value="2" onclick="appendToDisplay('2')">
+    <input type="button" class="number" value="3" onclick="appendToDisplay('3')">
+    <input type="button" class="operator" value="-" onclick="appendToDisplay('-')">
+    <br>
+    <input type="button" class="number" value="0" onclick="appendToDisplay('0')">
+    <input type="button" class="number" value="." onclick="appendToDisplay('.')">
+    <input type="button" class="operator" value="=" onclick="calculate()">
+    <input type="button" class="operator" value="+" onclick="appendToDisplay('+')">
+    
+    
+</div>
+
+<script>
+    function appendToDisplay(value) {
+        document.getElementById("display").value += value;
+    }
+
+    function calculate() {
+        var expression = document.getElementById("display").value;
+        try {
+            var result = eval(expression);
+            document.getElementById("display").value = result;
+        } catch (error) {
+            document.getElementById("display").value = 'Error';
+        }
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").value = '';
+    }
+
+    function deleteLastCharacter() {
+        var currentValue = document.getElementById("display").value;
+        document.getElementById("display").value = currentValue.slice(0, -1);
+    }
+</script>
+
+</body>
+</html>
